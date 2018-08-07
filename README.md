@@ -1,6 +1,6 @@
-# mermaid-live-editor
+# scl-live-editor
 
-Edit, preview and share mermaid charts/diagrams.
+Edit, preview and share System Context Language diagrams.
 
 
 ## Features
