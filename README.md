@@ -24,14 +24,14 @@ Time Travel
 ## Setup
 
 ```
-yarn install
+npm install
 ```
 
 
 ## Development
 
 ```
-yarn dev
+npm dev
 open http://localhost:1234
 ```
 
@@ -41,5 +41,5 @@ This app is created with React + React Router v4.
 ## Release
 
 ```
-yarn release
+npm release
 ```
