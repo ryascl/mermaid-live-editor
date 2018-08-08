@@ -3,6 +3,7 @@ import { Row, Col, Input, Icon, Tag, Affix, Card, Divider } from 'antd'
 import { Route } from 'react-router-dom'
 import { Base64 } from 'js-base64'
 import mermaid from 'mermaid'
+import { toFlowchart } from 'scl-to-mermaid';
 
 import Error from './Error'
 import Preview from './Preview'
@@ -22,12 +23,23 @@ class Edit extends React.Component {
 
     const { match: { params: { base64 } }, location: { search } } = this.props
     this.json = base64ToState(base64, search)
+    if(this.json.scl){
+      this.json.code = toFlowchart(this.json.scl);
+    }
     mermaid.initialize(this.json.mermaid)
   }
 
   onCodeChange (event) {
     const { history, match: { path } } = this.props
-    this.json.code = event.target.value
+    this.json.scl = event.target.value
+    if(this.json.scl) {
+      try {
+        this.json.code = toFlowchart(this.json.scl)
+      }
+      catch(ex) {
+        console.log('error generating flowchart', ex);
+      }
+    }
     const base64 = Base64.encodeURI(JSON.stringify(this.json))
     history.push(path.replace(':base64', base64))
   }
@@ -50,18 +62,21 @@ class Edit extends React.Component {
   render () {
     const { match: { url } } = this.props
     return <div>
-      <h1>Mermaid Live Editor</h1>
+      <h1>SCL Live Editor</h1>
       <Divider />
       <Row gutter={16}>
         <Col span={8}>
           <Affix>
-            <Card title='Code'>
-              <Input.TextArea autosize={{ minRows: 4, maxRows: 16 }} value={this.json.code} onChange={this.onCodeChange} />
+            <Card title='System Context Language'>
+              <Input.TextArea autosize={{ minRows: 4, maxRows: 16 }} value={this.json.scl} onChange={this.onCodeChange} />
             </Card>
           </Affix>
           <Card title='Mermaid configuration'>
             <Input.TextArea autosize={{ minRows: 4, maxRows: 16 }} defaultValue={JSON.stringify(this.json.mermaid, null, 2)} onChange={this.onMermaidConfigChange} />
           </Card>
+          <Card title='Mermaid Code'>
+              <Input.TextArea autosize={{ minRows: 4, maxRows: 16 }} readOnly={true} value={this.json.code} />
+            </Card>
           <Card title='Links'>
             <ul className='marketing-links'>
               <li><a href='https://mermaidjs.github.io/' target='_blank'><Icon type='book' /> Mermaid Documentation</a></li>

@@ -1,4 +1,5 @@
 import { Base64 } from 'js-base64'
+import { toFlowchart } from 'scl-to-mermaid';
 
 export const base64ToState = (base64, search) => {
   // for backward compatibility
@@ -18,14 +19,16 @@ export const base64ToState = (base64, search) => {
   return state
 }
 
-const defaultCode = `graph TD
-A[Christmas] -->|Get money| B(Go shopping)
-B --> C{Let me think}
-C -->|One| D[Laptop]
-C -->|Two| E[iPhone]
-C -->|Three| F[fa:fa-car Car]
+const defaultScl = `
+Flux Capacitor
+  is in A DeLorean
+  <Enables> Time Travel
+
+Time Travel
+  <Can Prevent> Getting Shot By Libyans
 `
 export const defaultState = {
-  code: defaultCode,
+  scl: defaultScl,
+  code: toFlowchart(defaultScl),
   mermaid: { theme: 'default' }
 }
