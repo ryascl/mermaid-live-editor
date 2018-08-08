@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "upgrade": "yarn-upgrade-all",
     "test": "standard && jest",
-    "test:watch": "yarn test --watch",
+    "test:watch": "npm run test --watch",
     "dev": "parcel ./index.html -d build",
     "release": "parcel build ./index.html -d docs --public-url ./",
-    "prepush": "yarn test"
+    "prepush": "npm run test"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
@@ -37,5 +36,9 @@
       "*.bundle.js",
       "docs/"
     ]
+  },
+  "jest": {
+    "verbose": true,
+    "testURL": "http://localhost:1234/"
   }
 }

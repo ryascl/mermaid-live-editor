@@ -1,5 +1,5 @@
 import { Base64 } from 'js-base64'
-import { toFlowchart } from 'scl-to-mermaid';
+import { toFlowchart } from 'scl-to-mermaid'
 
 export const base64ToState = (base64, search) => {
   // for backward compatibility

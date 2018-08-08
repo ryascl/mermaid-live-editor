@@ -22,12 +22,6 @@ const verifyTextArea = (code) => {
   expect(textArea.props().value).toEqual(code)
 }
 
-const verifyLinks = (code) => {
-  const links = wrapper.find('.marketing-links').find('li')
-  expect(links.length).toEqual(5)
-}
-
 test('/', () => {
-  verifyTextArea(defaultState.code)
-  verifyLinks(defaultState.code)
+  verifyTextArea(defaultState.scl)
 })
