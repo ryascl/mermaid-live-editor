@@ -36,10 +36,3 @@ open http://localhost:1234
 ```
 
 This app is created with React + React Router v4.
-
-
-## Release
-
-```
-npm release
-```
