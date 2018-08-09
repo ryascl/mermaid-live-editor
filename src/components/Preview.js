@@ -36,21 +36,21 @@ class Preview extends React.Component {
     const { code, history, match: { url } } = this.props
 
     const firstLoadCallback = (...args) => {
-      const images = this.container.getElementsByTagName('img');
-      const imageCount = images.length;
-      if(images && imageCount) {
-        let loadedCount = 0;
-        for(const image of images){
+      const images = this.container.getElementsByTagName('img')
+      const imageCount = images.length
+      if (images && imageCount) {
+        let loadedCount = 0
+        for (const image of images) {
           image.onload = () => {
-            loadedCount++;
-            if(loadedCount >= imageCount){
+            loadedCount++
+            if (loadedCount >= imageCount) {
               // all images loaded, re-init
-              mermaid.init(undefined, this.container);
+              mermaid.init(undefined, this.container)
             }
-          };
+          }
         }
       }
-    };
+    }
 
     try {
       mermaid.parse(code)
